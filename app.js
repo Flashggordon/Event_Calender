@@ -1,29 +1,33 @@
 const calender = document.getElementById("calender");
-
-const months = [ "January",
- "February",
+const monthEl = document.getElementById("month");
+const months = [
+  "January",
+  "February",
   "March",
-   "April",
-    "May",
-     "June",
-      "July",
-       "August",
-        "September",
-         "October",
-          "November",
-           "December" ];
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
-           const days = ["Sunday",
-            "Monday",
-             "Tuesday",
-              "Wednesday",
-               "Thursday",
-                "Friday", 
-                "Saturday"];
+const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
 
-                const today = new Date();
-                let currentMonth = today.getMonth();
-                let currentYear = today.getFullYear();
+const today = new Date();
+let currentMonth = today.getMonth();
+let currentYear = today.getFullYear();
 
 const drawBlankCalender = () => {
   for (let i = 0; i < 35; i++) {
@@ -48,28 +52,48 @@ const drawBlankCalender = () => {
   }
 };
 const updateCalender = (month, year, events) => {
-const dayElements = document.querySelectorAll(".day");
+  const dayElements = document.querySelectorAll(".day");
 
-const theFirst = new Date();
-theFirst.setMonth(month);
-theFirst.setFullYear(year);
+  const theFirst = new Date();
+  theFirst.setMonth(month);
+  theFirst.setFullYear(year);
 
-const theFirstDayOfWeek = theFirst.getDay();
-const monthName = months[month];
-const monthWtihYear = `${year}  - ${month}`;
-const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const theFirstDayOfWeek = theFirst.getDay();
+  const monthName = months[month];
+  const monthWtihYear = `${year}  - ${monthName}`;
+  monthEl.innerText = monthWtihYear;
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-let dayCounter = 1;
-for (let i = 0; i < dayElements.length; i++) {
+  let dayCounter = 1;
+  for (let i = 0; i < dayElements.length; i++) {
     const day = dayElements[i];
-  
+
     const dayNumber = day.querySelector(".day-number");
-    if (i >= theFirstDayOfWeek && dayCounter <= daysInMonth){
-      dayNumber.innerText = dayCounter;  
+    if (i >= theFirstDayOfWeek && dayCounter <= daysInMonth) {
+      dayNumber.innerText = dayCounter;
       dayCounter++;
+    } else {
+      dayNumber.innerText = "";
     }
-}   
+  }
+};
+const previousMonth= () => {
+    if (currentMonth === 0) {
+        currentMonth = 12;
+        currentYear--;
+    }
+    updateCalender(--currentMonth , currentYear);
 };
 
+const nextMonth = () => {
+    if (currentMonth === 11) {
+        currentMonth = -1;
+        currentYear++;
+    }
+    
+    updateCalender(++currentMonth , currentYear);
+};
+ 
+
 drawBlankCalender();
-updateCalender(currentMonth, currentYear,);
+updateCalender(currentMonth, currentYear);
