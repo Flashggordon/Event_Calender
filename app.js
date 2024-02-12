@@ -25,9 +25,19 @@ const days = [
   "Saturday",
 ];
 
+const STORYBLOK_URL = "https://api.storyblok.com/v2/cdn/stories?starts_withevents&token=VV6PM7J4EQUJhTnFjQwzHAtt";
+
+
 const today = new Date();
 let currentMonth = today.getMonth();
 let currentYear = today.getFullYear();
+
+const loadEvents = async () => {
+    const res = await fetch(STORYBLOK_URL);
+    const {stories} = await res.json(); 
+    
+}
+loadEvents();
 
 const drawBlankCalender = () => {
   for (let i = 0; i < 35; i++) {
