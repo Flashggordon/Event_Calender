@@ -21,6 +21,10 @@ const months = [ "January",
                 "Friday", 
                 "Saturday"];
 
+                const today = new Date();
+                let currentMonth = today.getMonth();
+                let currentYear = today.getFullYear();
+
 const drawBlankCalender = () => {
   for (let i = 0; i < 35; i++) {
     const day = document.createElement("div");
@@ -28,6 +32,7 @@ const drawBlankCalender = () => {
 
     const dayText = document.createElement("p");
     dayText.classList.add("day-text");
+    dayText.innerText = days[i % 7];
 
     const dayNumber = document.createElement("p");
     dayNumber.classList.add("day-number");
@@ -50,7 +55,21 @@ theFirst.setMonth(month);
 theFirst.setFullYear(year);
 
 const theFirstDayOfWeek = theFirst.getDay();
-const
-}
+const monthName = months[month];
+const monthWtihYear = `${year}  - ${month}`;
+const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+let dayCounter = 1;
+for (let i = 0; i < dayElements.length; i++) {
+    const day = dayElements[i];
+  
+    const dayNumber = day.querySelector(".day-number");
+    if (i >= theFirstDayOfWeek && dayCounter <= daysInMonth){
+      dayNumber.innerText = dayCounter;  
+      dayCounter++;
+    }
+}   
+};
 
 drawBlankCalender();
+updateCalender(currentMonth, currentYear,);
