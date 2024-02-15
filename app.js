@@ -24,9 +24,9 @@ const days = [
   "Friday",
   "Saturday",
 ];
-let events; 
-const STORYBLOK_URL = "https://api.storyblok.com/v2/cdn/stories?starts_with=events&token=VV6PM7J4EQUJhTnFjQwzHAtt";
+const STORYBLOK_URL = "https://api.storyblok.com/v2/cdn/stories?starts_with=events&token=xBfbB8wGvpLQDYWK518bQgtt";
 
+let events; 
 
 const today = new Date();
 let currentMonth = today.getMonth();
@@ -41,6 +41,7 @@ const loadEvents = async () => {
         accumulator[eventDate] = event.content;
         return accumulator;
 }, {});
+console.log(events);
 
 };
 loadEvents();
